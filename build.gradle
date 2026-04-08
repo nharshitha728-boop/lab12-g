@@ -1,0 +1,19 @@
+plugins {
+    id 'java' // Required for Java projects [cite: 135]
+}
+
+repositories {
+    mavenCentral() // Tells Gradle where to download JUnit [cite: 138]
+}
+
+dependencies {
+    // Basic JUnit 5 dependency [cite: 141]
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    
+    // Fix for Gradle 9+ execution errors
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform() // Essential for JUnit 5 tests to run [cite: 144]
+}
