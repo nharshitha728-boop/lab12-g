@@ -1,25 +1,31 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK17'
+    }
+
     stages {
 
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/nharshitha728-boop/lab11.git'
+                    url: 'https://github.com/nharshitha728-boop/lab12.git'
             }
         }
 
         stage('Build & Test') {
             steps {
-                bat 'mvn clean test'
+                dir('lab12-gradle') {
+                    bat 'gradlew clean test'
+                }
             }
         }
     }
 
     post {
         always {
-            junit '**/target/surefire-reports/*.xml'
+            junit 'lab12-gradle/build/test-results/test/*.xml'
         }
     }
 }
